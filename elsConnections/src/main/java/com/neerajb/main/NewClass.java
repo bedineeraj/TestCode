@@ -16,7 +16,7 @@ public class NewClass extends Thread{
 	public void run(){
 		for(String url : listUrls){
 			HttpClient httpClient = new HttpClient();
-			System.out.println("Thread:"+getName());
+//			System.out.println("Thread:"+getName());
 			httpClient.connect(url);	
 		}
 	}

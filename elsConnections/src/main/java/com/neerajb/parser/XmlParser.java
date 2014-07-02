@@ -18,6 +18,8 @@ public class XmlParser {
 		String readContents;
 		try {
 			readContents = FileUtils.readFileToString(new File("c:/delete/source.txt"));
+			readContents = readContents+FileUtils.readFileToString(new File("c:/delete/source2.txt"));
+			readContents = readContents+FileUtils.readFileToString(new File("c:/delete/source3.txt"));
 		} catch (IOException e) {
 			e.printStackTrace();
 			throw new RuntimeException("error reading file");

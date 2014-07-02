@@ -13,6 +13,7 @@ import org.apache.http.util.EntityUtils;
 public class HttpClient {
 	
 	private static int counter = 0;
+	public static int failureCounter = 0;
 	
 	public void connect(String strUrl){
 		System.out.println("HttpCLient.counter:"+(counter++));
@@ -21,7 +22,10 @@ public class HttpClient {
 		CloseableHttpResponse response1 = null;
 		try {
 			response1 = httpclient.execute(httpGet);
-			System.out.println(response1.getStatusLine());
+//			System.out.println(response1.getStatusLine());
+			if(response1.getStatusLine().getStatusCode()!=200){
+				++failureCounter;
+			}
 		    HttpEntity entity1 = response1.getEntity();
 //		    String content = EntityUtils.toString(entity1);
 //		    System.out.println("response contents:"+content);
@@ -29,9 +33,14 @@ public class HttpClient {
 		    // and ensure it is fully consumed
 		    EntityUtils.consume(entity1);
 		} catch (ClientProtocolException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
+			++failureCounter;
 		} catch (IOException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
+			++failureCounter;
+		}catch(Exception e){
+//			e.printStackTrace();
+			++failureCounter;
 		}finally {
 			if(response1!=null){
 				try {
@@ -39,6 +48,7 @@ public class HttpClient {
 					httpclient.close();
 				} catch (IOException e) { e.printStackTrace(); }
 			}
+			System.out.println("failureCounter:"+failureCounter);
 		}
 	}
 }
