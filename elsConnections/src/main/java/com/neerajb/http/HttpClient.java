@@ -13,6 +13,9 @@ import org.apache.http.util.EntityUtils;
 public class HttpClient {
 	
 	private static int counter = 0;
+	public static int failCounter = 0;
+	
+	//this is just a test comment
 	
 	public void connect(String strUrl){
 		System.out.println("HttpCLient.counter:"+(counter++));
@@ -21,8 +24,15 @@ public class HttpClient {
 		CloseableHttpResponse response1 = null;
 		try {
 			response1 = httpclient.execute(httpGet);
-			System.out.println(response1.getStatusLine());
-		    HttpEntity entity1 = response1.getEntity();
+			HttpEntity entity1 = response1.getEntity();
+//			System.out.println(response1.getStatusLine());
+			if(response1.getStatusLine().getStatusCode()!=200){
+				System.out.println("url:"+strUrl);
+				System.out.print(",status line:"+response1.getStatusLine());
+				System.out.println(",response:"+EntityUtils.toString(entity1));
+				++failCounter;
+			}
+		    
 //		    String content = EntityUtils.toString(entity1);
 //		    System.out.println("response contents:"+content);
 		    // do something useful with the response body
@@ -30,8 +40,10 @@ public class HttpClient {
 		    EntityUtils.consume(entity1);
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();
+			++failCounter;
 		} catch (IOException e) {
 			e.printStackTrace();
+			++failCounter;
 		}finally {
 			if(response1!=null){
 				try {
