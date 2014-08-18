@@ -12,6 +12,8 @@ import org.apache.http.util.EntityUtils;
 
 public class HttpClient {
 	
+	//this is just a test commit
+	
 	private static int counter = 0;
 	public static int failCounter = 0;
 	
