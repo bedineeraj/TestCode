@@ -11,8 +11,8 @@ import com.neerajb.parser.XmlParser;
 
 public class MainClass {
 	
-	private static final int NO_OF_URLS = 200;
-	public static final int NO_OF_THREADS = 10;
+	private static final int NO_OF_URLS = 1800;
+	public static final int NO_OF_THREADS = 90;
 	
 	XmlParser parser = new XmlParser();
 	RelatedUrlGenerator relatedUrlGenerator = new RelatedUrlGenerator();

@@ -15,8 +15,6 @@ public class HttpClient {
 	private static int counter = 0;
 	public static int failCounter = 0;
 	
-	//this is just a test comment
-	
 	public void connect(String strUrl){
 		System.out.println("HttpCLient.counter:"+(counter++));
 		CloseableHttpClient httpclient = HttpClients.createDefault();
